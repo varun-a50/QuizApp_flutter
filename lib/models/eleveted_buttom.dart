@@ -21,7 +21,10 @@ class ElevetedStyledButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(25),
         ),
       ),
-      child: Text(text),
+      child: Text(
+        text,
+        textAlign: TextAlign.center,
+      ),
     );
   }
 }

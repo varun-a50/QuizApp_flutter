@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:quizapp/data/questions.dart';
 import 'package:quizapp/models/eleveted_buttom.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen({super.key});
+  const QuestionsScreen({super.key, required this.chooseAnswer});
+
+  final void Function(String Answer) chooseAnswer;
 
   @override
   State<QuestionsScreen> createState() {
@@ -12,11 +15,20 @@ class QuestionsScreen extends StatefulWidget {
 }
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
+  var currentQuestionIndex = 0;
+
+  void answerQuestion(String Answer) {
+    widget.chooseAnswer(Answer);
+    setState(() {
+      currentQuestionIndex += 1;
+    });
+  }
+
   @override
   Widget build(context) {
     List Questions = questions;
 
-    var currentQuestion = questions[0];
+    var currentQuestion = questions[currentQuestionIndex];
 
     return SizedBox(
       width: double.infinity,
@@ -28,14 +40,22 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
           children: [
             Text(
               currentQuestion.text,
-              style: const TextStyle(color: Colors.white),
+              style: GoogleFonts.lato(
+                color: const Color.fromARGB(255, 185, 112, 245),
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(
               height: 20,
             ),
-            ...currentQuestion.answers.map((answer) {
-              return ElevetedStyledButton(text: answer, onPressed: () {});
+            ...currentQuestion.getShuffedanswer().map((answer) {
+              return ElevetedStyledButton(
+                  text: answer,
+                  onPressed: () {
+                    answerQuestion(answer);
+                  });
             }),
           ],
         ),
