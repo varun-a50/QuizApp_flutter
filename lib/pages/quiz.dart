@@ -13,7 +13,7 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  final List<String> selectedAnswer = [];
+  List<String> selectedAnswer = [];
 
   String activeScreen = "1";
 
@@ -26,6 +26,7 @@ class _QuizState extends State<Quiz> {
   void chooseAnswer(String Answer) {
     selectedAnswer.add(Answer);
 
+    selectedAnswer = [];
     if (selectedAnswer.length == questions.length) {
       setState(() {
         activeScreen = "1";
