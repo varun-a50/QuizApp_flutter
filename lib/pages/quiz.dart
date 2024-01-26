@@ -55,9 +55,10 @@ class _QuizState extends State<Quiz> {
     }
 
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
-      backgroundColor: const Color.fromARGB(255, 63, 21, 149),
-      body: screenWidget,
-    ));
+          backgroundColor: const Color.fromARGB(255, 63, 21, 149),
+          body: screenWidget,
+        ));
   }
 }
